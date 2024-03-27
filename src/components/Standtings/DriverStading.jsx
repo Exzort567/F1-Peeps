@@ -11,7 +11,7 @@ const DriverStanding = () => {
           try {
               setIsLoading(true);
               const driverStandingsData = await fetchDriverStandings();
-              console.log(driverStandingsData); // Add this line for debugging
+              
               setDriverStandings(driverStandingsData);
           } catch (error) {
               setError(error.message);

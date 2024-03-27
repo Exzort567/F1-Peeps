@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.race-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.race-names {
+    display: inline-block;
+}
+ul {
+    list-style-type: none;
+}
+.scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+
+.race-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.race-names {
+    display: inline-block;
+}
+
+.scroll-buttons {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.scroll-buttons button:focus {
+    outline: none;
+}

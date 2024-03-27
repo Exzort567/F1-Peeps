@@ -1,0 +1,64 @@
+.logo p {
+    font-family: 'inter';
+    font-weight:bolder;
+
+    font-size: 64px;
+   
+}
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    width: 100%;
+    margin-top: -12px;
+}
+.container {
+    padding: 2px 0; 
+ 
+}
+  
+.logo {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically */
+    text-decoration: none;
+
+}
+
+.logo .f1, .logo .peeps {
+    font-family: 'inter';
+    font-weight: bold;
+    font-size: 64px;
+    margin: 0; /* Remove default margin */
+}
+
+.logo .f1 {
+    color: red;
+    margin-left: 25px;
+    
+}
+
+.logo .peeps {
+    color: black;
+}
+    
+    
+  
+.f1peeps {
+    margin-left: 25px;
+}
+nav {
+
+    height: 4.3rem;
+    width: 100vw;
+    display: flex;
+    place-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+
+  
+  
+ 
