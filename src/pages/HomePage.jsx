@@ -1,20 +1,22 @@
-import React from 'react'
-import RaceSchedule from '../components/RaceSchedule/RaceSchedule'
-import DriverStanding from '../components/Standtings/DriverStading'
-import ConstructorStanding from '../components/Standtings/ConstructorStanding'
-import Navbar from '../components/Navbar/Navbar'
-import GrandPrix from '../components/GrandPrix/GrandPrix'
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar/Navbar';
+import GrandPrix from '../components/GrandPrix/GrandPrix';
+import RaceSchedule from '../components/RaceSchedule/RaceSchedule';
 
-const HomePage = () => {
-  return (
-    <>
-      <Navbar/>
-      <GrandPrix/>
-      <RaceSchedule/>
-    </>
-    
-    
-  )
+function HomePage() {
+    const [selectedRace, setSelectedRace] = useState(null);
+
+    const handleRaceClick = (race) => {
+        setSelectedRace(race);
+    };
+
+    return (
+        <>
+            <Navbar />
+            <GrandPrix onRaceClick={handleRaceClick} />
+            {selectedRace && <RaceSchedule raceDetails={selectedRace} />}
+        </>
+    );
 }
 
-export default HomePage
+export default HomePage;

@@ -4,7 +4,7 @@ const fetchRaceSchedule = async (round) => {
     try {
         const response = await fetch(`https://ergast.com/api/f1/2024/${round}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch race schedule');
+            throw new Error('Failed to fetch race');
         }
         const xmlData = await response.text();
         const jsonData = xmlJs.xml2json(xmlData, { compact: true, spaces: 4 });
