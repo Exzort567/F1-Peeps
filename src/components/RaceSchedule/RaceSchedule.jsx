@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchRaceSchedule } from '../../service.js/ergastAPI';
+import { fetchRaceSchedule } from '../../service.js/eargastRaceSchedule';
 
 function RaceSchedule() {
     const [races, setRaces] = useState([]);

@@ -1,4 +1,3 @@
-// ergastAPI.jsx
 import xmlJs from 'xml-js';
 
 const fetchRaceSchedule = async (round) => {
@@ -17,8 +16,12 @@ const fetchRaceSchedule = async (round) => {
             data.MRData.RaceTable &&
             data.MRData.RaceTable.Race
         )  {
-            const race = data.MRData.RaceTable.Race;
-            return [race]; // Wrap race in an array for consistency
+            let races = data.MRData.RaceTable.Race;
+            if (!Array.isArray(races)) {
+                races = [races]; // Wrap in array if only one race is returned
+            }
+            const raceNames = races.map(race => race.RaceName._text);
+            return raceNames; // Return an array of race names
         } else {
             throw new Error('Race data not available');
         }

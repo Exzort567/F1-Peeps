@@ -1,51 +1,36 @@
-.container {
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-}
-.race-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.race-names {
-    display: inline-block;
-}
-ul {
-    list-style-type: none;
-}
-.scroll-container {
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
-}
-
-.race-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.race-names {
-    display: inline-block;
-}
-
-.scroll-buttons {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.grandprix_container {
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: rgb(248, 248, 248);
 }
 
-.scroll-buttons button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
+.item {
+    display: flex;
+    align-items: center;
+    flex: 1;
 }
 
-.scroll-buttons button:focus {
-    outline: none;
+.race-list-wrapper {
+    margin: 20px 8px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 14%;
+    overflow-x:auto;
+    overscroll-behavior-inline: contain;
+    padding: 0 1rem 1rem;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #b9b9b9);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(transparent, #979797);
+}
+

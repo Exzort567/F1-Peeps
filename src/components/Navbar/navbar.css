@@ -13,16 +13,13 @@
     width: 100%;
     margin-top: -12px;
 }
-.container {
-    padding: 2px 0; 
- 
-}
+
   
 .logo {
     display: flex; /* Use flexbox */
     align-items: center; /* Align items vertically */
     text-decoration: none;
-
+    
 }
 
 .logo .f1, .logo .peeps {
@@ -34,7 +31,7 @@
 
 .logo .f1 {
     color: red;
-    margin-left: 25px;
+    margin-left: 18px;
     
 }
 
@@ -45,11 +42,11 @@
     
   
 .f1peeps {
-    margin-left: 25px;
+    margin-left: 18px;
 }
 nav {
 
-    height: 4.3rem;
+   
     width: 100vw;
     display: flex;
     place-items: center;
