@@ -15,13 +15,21 @@ const fetchRaceSchedule = async (round) => {
             data.MRData &&
             data.MRData.RaceTable &&
             data.MRData.RaceTable.Race
-        )  {
+        ) {
             let races = data.MRData.RaceTable.Race;
             if (!Array.isArray(races)) {
                 races = [races]; // Wrap in array if only one race is returned
             }
-            const raceNames = races.map(race => race.RaceName._text);
-            return raceNames; // Return an array of race names
+            return races.map(race => ({
+                RaceName: race.RaceName._text,
+                Circuit: race.Circuit,
+                Date: race.Date,
+                Time: race.Time,
+                FirstPractice: race.FirstPractice ? race.FirstPractice._text : '',
+                SecondPractice: race.SecondPractice ? race.SecondPractice._text : '',
+                ThirdPractice: race.ThirdPractice ? race.ThirdPractice._text : '',
+                Qualifying: race.Qualifying ? race.Qualifying._text : '',
+            }));
         } else {
             throw new Error('Race data not available');
         }

@@ -1,6 +1,6 @@
     import xmlJs from "xml-js";
 
-    const fetchRaceSchedule = async () => {
+    const fetchGrandPrixSchedule = async () => {
         try {
             const response = await fetch ('http://ergast.com/api/f1/current');
             if  (!response.ok) {
@@ -30,4 +30,4 @@
         }
     };
 
-    export { fetchRaceSchedule };
+    export { fetchGrandPrixSchedule };
