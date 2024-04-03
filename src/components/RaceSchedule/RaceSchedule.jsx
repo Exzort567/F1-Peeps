@@ -1,5 +1,14 @@
 import React from 'react';
 
+const ColoredLine = ({ color }) => (
+    <hr
+        style={{
+            color: color,
+            backgroundColor: color,
+            height: 2
+        }}
+    />
+);
 function RaceSchedule({ raceDetails }) {
     const { Time, RaceName, Circuit, Date } = raceDetails;
     
@@ -11,8 +20,10 @@ function RaceSchedule({ raceDetails }) {
                 {Circuit && <p>Track: {Circuit.CircuitName._text}</p>}
                 
             </div>
+            <ColoredLine color="black" />
         </div>
+        
     );
-}
+} 
 
 export default RaceSchedule;
