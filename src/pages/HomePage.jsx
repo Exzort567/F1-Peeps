@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import GrandPrix from '../components/GrandPrix/GrandPrix';
 import RaceSchedule from '../components/RaceSchedule/RaceSchedule';
-import RaceResultsPage from '../RaceResult/RaceResult';
+import RaceResults from '../RaceResult/RaceResult';
+
 
 
 function HomePage() {
@@ -17,7 +18,8 @@ function HomePage() {
             <Navbar />
             <GrandPrix onRaceClick={handleRaceClick} />
             {selectedRace && <RaceSchedule raceDetails={selectedRace} />}
-            <RaceResultsPage/>
+            <RaceResults/>
+           
            
         </>
     );

@@ -1,112 +1,46 @@
-import React from 'react';
-import '../RaceResult/RaceResult.css';
+import React, { useEffect, useState } from 'react';
+import { fetchRaceResults } from '../service.js/ergastRaceResult';
 
-const RaceResults = () => (
-    <div className="section">
-        <h2>Result</h2>
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Pos</th>
-                    <th>Driver</th>
-                    <th>Time</th>
-                    <th>Pts</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Lewis Hamilton</td>
-                    <td>1:30:15</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Max Verstappen</td>
-                    <td>1:30:30</td>
-                    <td>18</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Valtteri Bottas</td>
-                    <td>1:30:45</td>
-                    <td>15</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-);
+const RaceResultsPage = () => {
+    const [raceResults, setRaceResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const ConstructorStandings = () => (
-    <div className="section">
-        <h2>2024 Constructor Standing</h2>
-        <table className="table2">
-            <thead>
-                <tr>
-                    <th>Pos</th>
-                    <th>Team</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mercedes</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Red Bull Racing</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ferrari</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setIsLoading(true);
+                const result = await fetchRaceResults();
+                setRaceResults(result.raceResults);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
-const DriverStandings = () => (
-    <div className="section">
-        <h2>2024 Driver Standing</h2>
-        <table className="table3">
-            <thead>
-                <tr>
-                    <th>Pos</th>
-                    <th>Driver</th>
-                    <th>Pts</th>
-                    <th>Wins</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Lewis Hamilton</td>
-                    <td>25</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Max Verstappen</td>
-                    <td>18</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Valtteri Bottas</td>
-                    <td>15</td>
-                    <td>0</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-);
-
-const RaceResultsPage = () => (
-    <div className="container">
-        <RaceResults />
-        <ConstructorStandings />
-        <DriverStandings />
-    </div>
-);
+    return (
+        <div className="container">
+            {isLoading && <div>Loading...</div>}
+            {error && <div>Error: {error}</div>}
+            {raceResults && raceResults.length > 0 && (
+                <div>
+                    <h2>Race Results</h2>
+                    {raceResults.map((result, index) => (
+                        <div key={index}>
+                            <p>Driver: {result.Driver?.GivenName?._text} {result.Driver?.FamilyName?._text}</p>
+                            <p>Position: {result._attributes.position}</p>
+                            <p>Points: {result._attributes.points}</p>
+                            <p>Time: {result.Time?._text}</p>
+                            {/* Add more details as needed */}
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default RaceResultsPage;
