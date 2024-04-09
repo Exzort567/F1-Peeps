@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import GrandPrix from '../components/GrandPrix/GrandPrix';
 import RaceSchedule from '../components/RaceSchedule/RaceSchedule';
-import RaceResults from '../RaceResult/RaceResult';
-
-
+import RaceResult from '../RaceResult/RaceResult'; // Import the RaceResult component
 
 function HomePage() {
-    const [selectedRace, setSelectedRace] = useState(null);
+    const [selectedRace, setSelectedRace] = useState(1);
 
     const handleRaceClick = (race) => {
         setSelectedRace(race);
@@ -17,10 +15,14 @@ function HomePage() {
         <>
             <Navbar />
             <GrandPrix onRaceClick={handleRaceClick} />
-            {selectedRace && <RaceSchedule raceDetails={selectedRace} />}
-            <RaceResults/>
-           
-           
+            {selectedRace && (
+                <>  
+                    
+                    <RaceSchedule raceDetails={selectedRace} />
+                    <RaceResult selectedRace={selectedRace} />
+                    
+                </>
+            )}
         </>
     );
 }
