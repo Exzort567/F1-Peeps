@@ -1,4 +1,3 @@
-// GrandPrix.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchRaceSchedule } from '../../service.js/ergastAPI';
 import '../GrandPrix/GrandPrix.css';
@@ -7,7 +6,7 @@ function GrandPrix({ onRaceClick }) {
     const [races, setRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const raceListRef = useRef(null);
+    const raceListRef = useRef(null); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,7 +43,7 @@ function GrandPrix({ onRaceClick }) {
                     ref={raceListRef}
                 >   
                     {races.map((race, index) => (
-                        <span key={index} onClick={() => onRaceClick(race)}>
+                        <span key={index} onClick={() => onRaceClick(race)}> {/* Pass race.round to the onRaceClick handler */}
                             {race.RaceName} 
                         </span>
                     ))}

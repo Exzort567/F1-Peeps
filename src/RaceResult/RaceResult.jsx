@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { fetchRaceResults } from '../service.js/ergastRaceResult';
-
+import  fetchRaceResults  from '../service.js/ergastRaceResult';
 
 
 
 const RaceResult = ({ selectedRace }) => {
-    const [raceResults, setRaceResults] = useState([]);
+    const [raceResults, setRaceResults] = useState([1]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!selectedRace || !selectedRace.round) return; // Check if selectedRace is defined and has a round property
             try {
                 setIsLoading(true);
                 const result = await fetchRaceResults(selectedRace.round);
@@ -23,7 +21,7 @@ const RaceResult = ({ selectedRace }) => {
             }
         };
         fetchData();
-    }, [selectedRace]);
+    }, []);
 
     return (
         <div className="container">
@@ -45,10 +43,10 @@ const RaceResult = ({ selectedRace }) => {
                         <tbody className="divide-y divide-gray-200">
                             {raceResults.map((result, index) => (
                                 <tr key={index}>
-                                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{result._attributes.position}</td>
+                                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{result.position}</td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.Driver?.GivenName?._text} {result.Driver?.FamilyName?._text}</td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.Time?._text}</td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result._attributes.points}</td>
+                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.points}</td>
                                 </tr>
                             ))}
                         </tbody>
