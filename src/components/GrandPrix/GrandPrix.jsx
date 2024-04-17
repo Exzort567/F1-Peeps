@@ -6,7 +6,7 @@ function GrandPrix({ onRaceClick }) {
     const [races, setRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const raceListRef = useRef(null); 
+    const raceListRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +24,8 @@ function GrandPrix({ onRaceClick }) {
                 setIsLoading(false);
             }
         };
-    
+        
+
         fetchData();
     }, []);
 
@@ -38,13 +39,13 @@ function GrandPrix({ onRaceClick }) {
     return (
         <div className='container grandprix_container'>
             <div className='item'>
-                <div 
-                    className="race-list-wrapper" 
+                <div
+                    className="race-list-wrapper"
                     ref={raceListRef}
-                >   
+                >
                     {races.map((race, index) => (
-                        <span key={index} onClick={() => onRaceClick(race)}> {/* Pass race.round to the onRaceClick handler */}
-                            {race.RaceName} 
+                        <span key={index} onClick={() => onRaceClick(race)}> {/* Pass race object to the onRaceClick handler */}
+                            {race.RaceName}
                         </span>
                     ))}
                 </div>

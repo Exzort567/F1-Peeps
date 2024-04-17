@@ -8,6 +8,7 @@ const fetchRaceSchedule = async (round) => {
         if (!response.ok) {
             throw new Error('Failed to fetch race');
         }
+        console.log(response);
         
         
         const xmlData = await response.text();

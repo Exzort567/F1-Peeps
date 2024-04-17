@@ -1,15 +1,25 @@
+// ergastRaceResult.js
 import xmlJs from 'xml-js';
+import { raceresult } from './apis'; // Import the raceresult array from apis.js
 
-const fetchRaceResults = async (round) => {
+const fetchRaceResults = async (raceId) => {
     try {
-        const response = await fetch(`http://ergast.com/api/f1/current/${round}/results`);
+        const race = raceresult.find(item => item.id === raceId);
+        if (!race) {
+            throw new Error('Race not found');
+        }
+        console.log(race);
+        const response = await fetch(race.url);
+        console.log(race)
         if (!response.ok) {
             throw new Error('Failed to fetch race results');
         }
-        
+        console.log(response);
+
         const xmlData = await response.text();
         const jsonData = xmlJs.xml2json(xmlData, { compact: true, spaces: 4 });
         const data = JSON.parse(jsonData);
+        console.log(data);
 
         const results = data?.MRData?.RaceTable?.Race?.ResultsList?.Result;
         if (results && !Array.isArray(results)) {
@@ -25,4 +35,4 @@ const fetchRaceResults = async (round) => {
     }
 };
 
-export default fetchRaceResults;
+export { fetchRaceResults };

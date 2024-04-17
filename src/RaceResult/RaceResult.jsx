@@ -1,60 +1,51 @@
+// RaceResult.jsx
 import React, { useEffect, useState } from 'react';
-import  fetchRaceResults  from '../service.js/ergastRaceResult';
+import { fetchRaceResults } from '../service.js/ergastRaceResult'; // Import the fetchRaceResults function from apis.js
 
+const ColoredLine = ({ color }) => (
+    <hr
+        style={{
+            color: color,
+            backgroundColor: color,
+            height: 2
+        }}
+    />
+);
 
-
-const RaceResult = ({ selectedRace }) => {
-    const [raceResults, setRaceResults] = useState([1]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+function RaceResult({ raceDetails }) {
+    const [raceResults, setRaceResults] = useState([]);
+    const { id } = raceDetails;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setIsLoading(true);
-                const result = await fetchRaceResults(selectedRace.round);
+                const result = await fetchRaceResults(id);
                 setRaceResults(result.raceResults);
             } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
+                console.error('Error fetching race results:', error);
             }
         };
+
         fetchData();
-    }, []);
+    }, [id]);
 
     return (
-        <div className="container">
-            {isLoading && <div>Loading...</div>}
-            {error && <div>Error: {error}</div>}
-            {raceResults && raceResults.length > 0 && (
-                <div className="overflow-x-auto">
-                    <h2>Results</h2>
-                    <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                        <thead className="ltr:text-left rtl:text-right">
-                            <tr>
-                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pos</th>
-                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Driver</th>
-                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Time</th>
-                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Pts</th>
-                            </tr>
-                        </thead>
-
-                        <tbody className="divide-y divide-gray-200">
-                            {raceResults.map((result, index) => (
-                                <tr key={index}>
-                                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{result.position}</td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.Driver?.GivenName?._text} {result.Driver?.FamilyName?._text}</td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.Time?._text}</td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{result.points}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+        <div className='raceSchedule_container'>
+            <div>
+                <h2>Race Results</h2>
+                <ul>
+                    {raceResults.map((result, index) => (
+                        <li key={index}>
+                            <strong>Position:</strong> {result.position._text}<br />
+                            <strong>Driver:</strong> {result.Driver ? result.Driver.familyName._text : 'Unknown'}<br />
+                            <strong>Constructor:</strong> {result.Constructor ? result.Constructor.name._text : 'Unknown'}<br />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <ColoredLine color="black" />
         </div>
     );
-};
+}
 
 export default RaceResult;
