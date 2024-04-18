@@ -3,8 +3,10 @@ import xmlJs from 'xml-js';
 import { raceresult } from './apis'; // Import the raceresult array from apis.js
 
 const fetchRaceResults = async (raceId) => {
+    console.log(raceId);
     try {
         const race = raceresult.find(item => item.id === raceId);
+        console.log(raceId);
         if (!race) {
             throw new Error('Race not found');
         }

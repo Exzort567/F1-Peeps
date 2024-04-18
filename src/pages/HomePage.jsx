@@ -4,6 +4,8 @@ import GrandPrix from '../components/GrandPrix/GrandPrix';
 import RaceSchedule from '../components/RaceSchedule/RaceSchedule';
 import RaceResult from '../RaceResult/RaceResult'; 
 import { fetchRaceResults } from '../service.js/ergastRaceResult';
+import ConstructorStanding from '../components/Standtings/ConstructorStanding';
+import DriverStanding from '../components/Standtings/DriverStading';
 
 function HomePage() {
     const [selectedRace, setSelectedRace] = useState(null);
@@ -26,18 +28,20 @@ function HomePage() {
         <>
             <Navbar />
             <GrandPrix onRaceClick={handleRaceClick} />
+            <DriverStanding/>
             {selectedRace && (
                 <>  
                     <RaceSchedule raceDetails={selectedRace} />
                     
-                    {/* Extract round information from selectedRaceResult */}
-                    {selectedRaceResult && selectedRaceResult.round && (
-                        <RaceResult round={selectedRaceResult} />
-                    )}
+                   
                 </>
             )}
             {!selectedRace && <p>No race selected</p>}
+            <ConstructorStanding/>
+            
+            
         </>
+      
     );
 }
 
