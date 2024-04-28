@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchDriverStandings } from '../../service.js/ergastDriverStandingAPI';
+import './driverStanding.css'
 
 const DriverStanding = () => {
     const [driverStandings, setDriverStandings] = useState([]);
@@ -31,7 +32,7 @@ const DriverStanding = () => {
     }
 
     return (
-        <div>
+        <div className='container_driver'>
             <h1>Current Driver Standings</h1>
             <table>
                 <thead>

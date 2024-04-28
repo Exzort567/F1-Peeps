@@ -28,7 +28,7 @@ function HomePage() {
         <>
             <Navbar />
             <GrandPrix onRaceClick={handleRaceClick} />
-            <DriverStanding/>
+            
             {selectedRace && (
                 <>  
                     <RaceSchedule raceDetails={selectedRace} />
@@ -37,6 +37,7 @@ function HomePage() {
                 </>
             )}
             {!selectedRace && <p>No race selected</p>}
+            <DriverStanding/>
             <ConstructorStanding/>
             
             

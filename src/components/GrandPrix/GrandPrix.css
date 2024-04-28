@@ -20,6 +20,7 @@
     overflow-x:auto;
     overscroll-behavior-inline: contain;
     padding: 0 1rem 1rem;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {

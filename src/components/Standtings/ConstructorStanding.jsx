@@ -21,10 +21,33 @@ const ConstructorStanding = () => {
         };
         fetchData();
     }, []);
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
-            ConstructorStanding
+            <table>
+                <thead>
+                    <th>Position</th>
+                    <th>Constructor</th>
+                    <th>Points</th>
+                    <th>Wins</th>
+                </thead>
+                <tbody>
+                    {constructorStandings.map((constructor, index) => (
+                        <tr key={index}>
+                            <td>{constructor._attributes.position}</td>
+                            <td>{constructor.Constructor.Name._text}</td>
+                            <td>{constructor._attributes.points}</td>
+                            <td>{constructor._attributes.wins}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
