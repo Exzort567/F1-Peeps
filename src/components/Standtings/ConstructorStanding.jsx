@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchConstructorStandings } from '../../service.js/ergastConstructorStanding';
+import './driverStanding.css'
 
 const ConstructorStanding = () => {
     const [constructorStandings, setConstructorStandings] = useState([]);
@@ -11,7 +12,7 @@ const ConstructorStanding = () => {
             try {
                 setIsLoading(true);
                 const constructorStandingsData = await fetchConstructorStandings();
-                console.log(constructorStandingsData);
+                
                 setConstructorStandings(constructorStandingsData);
             } catch (error) {
                 setError(error.message);
@@ -29,7 +30,8 @@ const ConstructorStanding = () => {
     }
 
     return (
-        <div>
+        <div className='container_driver'>
+            <h1>Current Constructor Standings</h1>
             <table>
                 <thead>
                     <th>Position</th>

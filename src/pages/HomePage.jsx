@@ -6,6 +6,7 @@ import RaceResult from '../RaceResult/RaceResult';
 import { fetchRaceResults } from '../service.js/ergastRaceResult';
 import ConstructorStanding from '../components/Standtings/ConstructorStanding';
 import DriverStanding from '../components/Standtings/DriverStading';
+import './homepage.css'
 
 function HomePage() {
     const [selectedRace, setSelectedRace] = useState(null);
@@ -37,8 +38,12 @@ function HomePage() {
                 </>
             )}
             {!selectedRace && <p>No race selected</p>}
-            <DriverStanding/>
-            <ConstructorStanding/>
+            <div className='standings'>
+                <DriverStanding/>
+                <RaceResult/>
+                <ConstructorStanding/>
+            </div>
+            
             
             
         </>

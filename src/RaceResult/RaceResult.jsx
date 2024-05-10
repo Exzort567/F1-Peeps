@@ -1,49 +1,57 @@
-// RaceResult.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchRaceResults } from '../service.js/ergastRaceResult'; // Import the fetchRaceResults function from apis.js
+import { fetchRaceResults } from '../service.js/ergastRaceResult'; 
 
-const ColoredLine = ({ color }) => (
-    <hr
-        style={{
-            color: color,
-            backgroundColor: color,
-            height: 2
-        }}
-    />
-);
-
-function RaceResult({ raceDetails }) {
+const RaceResult = () => {
     const [raceResults, setRaceResults] = useState([]);
-    const { id } = raceDetails;
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await fetchRaceResults(id);
-                setRaceResults(result.raceResults);
+                setIsLoading(true);
+                const raceResults = await fetchRaceResults();
+                setRaceResults(raceResults);
             } catch (error) {
-                console.error('Error fetching race results:', error);
+                setError(error.message);
+            } finally {
+                setIsLoading(false);
             }
         };
-
         fetchData();
-    }, [id]);
+    }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
-        <div className='raceSchedule_container'>
-            <div>
-                <h2>Race Results</h2>
-                <ul>
-                    {raceResults.map((result, index) => (
-                        <li key={index}>
-                            <strong>Position:</strong> {result.position._text}<br />
-                            <strong>Driver:</strong> {result.Driver ? result.Driver.familyName._text : 'Unknown'}<br />
-                            <strong>Constructor:</strong> {result.Constructor ? result.Constructor.name._text : 'Unknown'}<br />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            <ColoredLine color="black" />
+        <div className='container_driver'>
+            <h1>Race Result</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Driver</th>
+                        <th>Constructor</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {raceResults.map((race, index) => (
+                    <tr key={index}>
+                        <td>{race._attributes.position}</td>
+                        <td>{race.Driver.GivenName._text} {race.Driver.FamilyName._text}</td>
+                        <td>{race.Constructor.Name._text}</td>
+                        <td>{race._attributes.points}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
     );
 }
