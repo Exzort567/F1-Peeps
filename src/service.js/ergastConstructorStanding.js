@@ -2,7 +2,7 @@ import xmlJs from 'xml-js';
 
 const fetchConstructorStandings = async () => {
     try {
-        const response = await fetch('http://ergast.com/api/f1/current/constructorStandings');
+        const response = await fetch('https://ergast.com/api/f1/current/constructorStandings');
         if (!response.ok) {
             throw new Error('Failed to fetch Constructor Standings');
         }

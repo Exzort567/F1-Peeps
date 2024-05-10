@@ -2,7 +2,7 @@ import xmlJs from 'xml-js';
 
 const fetchDriverStandings = async () => {
     try {
-        const response = await fetch('http://ergast.com/api/f1/current/driverStandings');
+        const response = await fetch('https://ergast.com/api/f1/current/driverStandings');
         if (!response.ok) {
             throw new Error('Failed to fetch driver standings');
         }
