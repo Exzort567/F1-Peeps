@@ -31,7 +31,7 @@ const RaceResult = () => {
 
     return (
         <div className='container_driver'>
-            <h1>Race Result</h1>
+            <h1>Last Race Result</h1>
             <table>
                 <thead>
                     <tr>
